@@ -6,19 +6,21 @@ if(NOT CMAKE_BUILD_TYPE)
         set(CMAKE_BUILD_TYPE Debug)
 endif()
 
-set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -Wextra")
-set(CMAKE_CXX_FLAGS_RELASE "-O2")
+set(CMAKE_C_FLAGS_DEBUG "-g -Wall -Wextra -lm")
+set(CMAKE_C_FLAGS_RELASE "-O2 -lm")
 set(CMAKE_BUILD_PARALLEL_LEVEL 8)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin")
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 file(GLOB SOURCES
-    "src/*.cpp"
+    "src/*.c"
 )
 
 file(GLOB HEADERS
     "inc/*.h"
 )
 
-project(Prime_find)
+project(structures C)
 include_directories(${PROJECT_SOURCE_DIR}/inc ${PROJECT_SOURCE_DIR}/src)
-add_executable(Prime_find main.cpp ${SOURCES})
+add_executable(structures main.c ${SOURCES})
+target_link_libraries(structures "-lm")
