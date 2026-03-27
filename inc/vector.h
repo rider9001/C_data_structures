@@ -8,7 +8,6 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 
 /// @brief Factor to expand memory by when capacity is reached
 #define VEC_MEM_EXPAND_FACTOR 1.5
@@ -30,6 +29,12 @@ typedef struct
 ///
 /// @param vec vector to initialise/reset
 void init_vector(vector *vec);
+
+/// ------------------------------------------
+/// @brief Function to free vector memory and set vector size to 0
+///
+/// @param vec pointer to vector to clear
+void clear_vector(vector *vec);
 
 /// ------------------------------------------
 /// @brief Safe get function for vector

@@ -15,6 +15,19 @@ void init_vector(vector *vec)
 }
 
 /// ------------------------------------------
+void clear_vector(vector *vec)
+{
+    if (vec->mem != NULL)
+    {
+        free(vec->mem);
+        vec->mem = NULL;
+    }
+
+    vec->capacity = 0;
+    vec->count = 0;
+}
+
+/// ------------------------------------------
 int vec_get(vector *vec, size_t idx)
 {
     if (idx >= vec->count)
@@ -32,7 +45,9 @@ void push_back(vector *vec, int num)
 {
     if (vec->count + 1 > vec->capacity)
     {
-        vec->capacity = ceil(vec->capacity * VEC_MEM_EXPAND_FACTOR);
+        // +1 is to prevent non integer values creating a new size the same as the old size
+        // e.g: 1 * 1.5 = 1.5 -> 1 need to add 1 -> 2
+        vec->capacity = vec->capacity * VEC_MEM_EXPAND_FACTOR + 1;
         vec->mem = realloc(vec->mem, vec->capacity * sizeof(int));
     }
 
@@ -48,10 +63,7 @@ void remove_at(vector *vec, size_t idx)
     // if last index, can simply walk the count back to remove the item
     if (idx != vec->count - 1)
     {
-        for (size_t i = idx; i < vec->count - 1; i++)
-        {
-            vec->mem[i] = vec->mem[i+1];
-        }
+        memcpy(vec->mem + idx, vec->mem + idx + 1, (vec->count - idx) * sizeof(int));
     }
 
     vec->count--;
