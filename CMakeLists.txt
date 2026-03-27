@@ -22,5 +22,5 @@ file(GLOB HEADERS
 
 project(structures C)
 include_directories(${PROJECT_SOURCE_DIR}/inc ${PROJECT_SOURCE_DIR}/src)
-add_executable(structures main.c ${SOURCES})
-target_link_libraries(structures "-lm")
+add_executable(vector vector_test.c ${SOURCES})
+add_executable(hashmap hashmap_test.c ${SOURCES})
