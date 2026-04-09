@@ -23,4 +23,4 @@ file(GLOB HEADERS
 project(structures C)
 include_directories(${PROJECT_SOURCE_DIR}/inc ${PROJECT_SOURCE_DIR}/src)
 add_executable(vector vector_test.c ${SOURCES})
-add_executable(hashmap hashmap_test.c ${SOURCES})
+add_executable(tree tree_test.c ${SOURCES})
